@@ -163,6 +163,21 @@ strtBtn.addEventListener ('click', function displayQuestions() {
         question3.appendChild(answerText[i])
         answerText[i].setAttribute('style', 'display:block; border-radius:20px; center; padding:10px 24px; margin:5px; background:#000000; color:white;')
     };
+
+    answer1.addEventListener('click', function clearQuestion3() {
+        body.removeChild(question3);
+    });
+
+    answer1.addEventListener('click', function displayQuizEnd(){
+        var end = document.createElement('div');
+        var endText = document.createElement('h2');
+
+        endText.textContent = "All done!"
+
+        body.appendChild(end);
+        end.appendChild(endText);
+
+    })
     })
     })
 });
