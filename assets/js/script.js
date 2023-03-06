@@ -57,7 +57,7 @@ title.setAttribute('style', 'margin:auto; width:50%; text-align:center;')
 header.setAttribute('style', 'display:flex; justify-content:space-between;')
 strtBtn.setAttribute('style', 'background-color:#000000; color:white; border-radius: 4px; padding: 14px 40px; font-size:16px;')
 
-strtBtn.addEventListener ('click', function displayQuestion() {
+strtBtn.addEventListener ('click', function displayQuestions() {
     // This removes the title, instructions, and start button in order to display the first question.
     body.removeChild(title);
 
@@ -89,4 +89,81 @@ strtBtn.addEventListener ('click', function displayQuestion() {
         question1.appendChild(answerText[i])
         answerText[i].setAttribute('style', 'display:block; border-radius:20px; center; padding:10px 24px; margin:5px; background:#000000; color:white;')
     }
+    
+    //Removes question1 when the correct answer is clicked.
+    answer1.addEventListener('click', function clearQuestion1() {
+        body.removeChild(question1);
+    })
+
+    //Displays the second question when the correct answer button is clicked.
+    answer1.addEventListener('click', function displayQuestion2() {
+
+    //Creates all elements that will render question 2 and answer options on the page.    
+    var question2 = document.createElement('div');
+    var answer1 = document.createElement('button');
+    var answer2 = document.createElement('button');
+    var answer3 = document.createElement('button');
+    var answer4 = document.createElement('button');
+
+    // Assigns text taken from the 'questions' array located in the global variables. The '1' index indicates that the text was taken from the second object in that array.
+    question2.textContent = questions[1].question;
+	answer1.textContent = questions[1].answer1;
+	answer2.textContent = questions[1].answer2;
+	answer3.textContent = questions[1].answer3;
+	answer4.textContent = questions[1].answer4;
+
+    // Sets the attributes for the 'question2' div.
+    question2.setAttribute('style', 'font-size:25px; text-align:center; padding:50px');
+
+    //Appends the 'question2' div to the body of the document. At this step you should be able to see the question on the webpage.
+    body.appendChild(question2);
+
+    //Creates an array for all the answers to the second question that will be used in a for loop to prevent repeated code.
+    var answerText = [answer1, answer2, answer3, answer4]
+
+    //For loop appends all four answers to the 'question2' div and sets the style attributes for the answers. At this point you should see the four answer buttons displayed on the webpage.
+    for (var i = 0; i < answerText.length; i++) {
+        question2.appendChild(answerText[i])
+        answerText[i].setAttribute('style', 'display:block; border-radius:20px; center; padding:10px 24px; margin:5px; background:#000000; color:white;')
+    }
+
+    //Removes question2 when the correct answer is clicked.
+    answer3.addEventListener('click', function clearQuestion2() {
+        body.removeChild(question2);
+    })
+
+    //Displays the third question when the correct answer button is clicked.
+    answer3.addEventListener('click', function displayQuestion3(){
+
+        //Creates all elements that will render question 3 and answer options on the page.    
+    var question3 = document.createElement('div');
+    var answer1 = document.createElement('button');
+    var answer2 = document.createElement('button');
+    var answer3 = document.createElement('button');
+    var answer4 = document.createElement('button');
+
+    // Assigns text taken from the 'questions' array located in the global variables. The '2' index indicates that the text was taken from the third object in that array.
+    question3.textContent = questions[2].question;
+	answer1.textContent = questions[2].answer1;
+	answer2.textContent = questions[2].answer2;
+	answer3.textContent = questions[2].answer3;
+	answer4.textContent = questions[2].answer4;
+
+    // Sets the attributes for the 'question3' div.
+    question3.setAttribute('style', 'font-size:25px; text-align:center; padding:50px');
+
+    //Appends the 'question3' div to the body of the document. At this step you should be able to see the question on the webpage.
+    body.appendChild(question3);
+
+    //Creates an array for all the answers to the third question that will be used in a for loop to prevent repeated code.
+    var answerText = [answer1, answer2, answer3, answer4]
+
+    //For loop appends all four answers to the 'question3' div and sets the style attributes for the answers. At this point you should see the four answer buttons displayed on the webpage.
+    for (var i = 0; i < answerText.length; i++) {
+        question3.appendChild(answerText[i])
+        answerText[i].setAttribute('style', 'display:block; border-radius:20px; center; padding:10px 24px; margin:5px; background:#000000; color:white;')
+    };
+    })
+    })
 });
+
