@@ -1,12 +1,13 @@
-//Setting variables
+//Setting global variables
 var body = document.body;
 var header = document.createElement('header');
 var highscores = document.createElement('span');
-var timer = document.createElement('span')
+var timerEl = document.createElement('span', id='timer');
+var totalTime = 60;
 var title = document.createElement('div');
-var titleName = document.createElement('h1')
-var instructions = document.createElement('h3')
-var strtBtn = document.createElement('button')
+var titleName = document.createElement('h1');
+var instructions = document.createElement('h3');
+var strtBtn = document.createElement('button');
 var questions = [
     {
         question: 'Which of the following functions of Array object returns a new array comprised of this array joined with other array(s) and/or value(s)?',
@@ -40,13 +41,13 @@ highscores.textContent = 'View high scores';
 titleName.textContent = 'JavaScript Quiz Game';
 instructions.textContent = 'Try to answer the following JavaScript code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds.';
 strtBtn.textContent = 'Start Quiz'
-timer.textContent = 'Time: ';
+timerEl.textContent = 'Timer: ' + totalTime;
 
 
 //Appending elements
 body.appendChild(header);
 header.appendChild(highscores);
-header.appendChild(timer);
+header.appendChild(timerEl);
 body.appendChild(title);
 title.appendChild(titleName);
 title.appendChild(instructions);
@@ -135,7 +136,7 @@ strtBtn.addEventListener ('click', function displayQuestions() {
     //Displays the third question when the correct answer button is clicked.
     answer3.addEventListener('click', function displayQuestion3(){
 
-        //Creates all elements that will render question 3 and answer options on the page.    
+    //Creates all elements that will render question 3 and answer options on the page.    
     var question3 = document.createElement('div');
     var answer1 = document.createElement('button');
     var answer2 = document.createElement('button');
@@ -182,3 +183,18 @@ strtBtn.addEventListener ('click', function displayQuestions() {
     })
 });
 
+// Displays the timer in the header decreasing by 1 second
+function countdown() {
+    var timerId = setInterval(function() {
+        totalTime--;
+        timerEl.textContent = 'Timer: ' + totalTime + ' seconds remaining.';
+
+        if(totalTime === 0) {
+            clearInterval(timerId);
+            alert('Times Up')
+        }
+    }, 1000);
+};
+
+// Adds click event to start the timer once start button is clicked.
+strtBtn.addEventListener('click', countdown);
