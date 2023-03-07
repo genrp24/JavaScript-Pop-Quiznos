@@ -58,6 +58,24 @@ title.setAttribute('style', 'margin:auto; width:50%; text-align:center;')
 header.setAttribute('style', 'display:flex; justify-content:space-between;')
 strtBtn.setAttribute('style', 'background-color:#000000; color:white; border-radius: 4px; padding: 14px 40px; font-size:16px;')
 
+// Displays the timer in the header decreasing by 1 second
+function countdown() {
+    var timerId = setInterval(function() {
+        totalTime--;
+        timerEl.textContent = 'Timer: ' + totalTime + ' seconds remaining.';
+
+        if(totalTime <= 0) {
+            clearInterval(timerId);
+            alert('Times Up')
+            timerEl.textContent = 0;
+        }
+    }, 1000);
+};
+
+// Adds click event to start the timer once start button is clicked.
+strtBtn.addEventListener('click', countdown);
+
+// Starts the quiz by displaying the first question
 strtBtn.addEventListener ('click', function displayQuestions() {
     // This removes the title, instructions, and start button in order to display the first question.
     body.removeChild(title);
@@ -91,6 +109,21 @@ strtBtn.addEventListener ('click', function displayQuestions() {
         answerText[i].setAttribute('style', 'display:block; border-radius:20px; center; padding:10px 24px; margin:5px; background:#000000; color:white;')
     }
     
+    // For loop adds a 10 second penalty for clicking one of the three incorrect answers. I just changed the index to start at the second index since the correct answer is the first index in the object.
+    for (var i = 1; i < answerText.length; i++) {
+        answerText[i].addEventListener('click', function penalize(){
+            totalTime -= 10;
+            timerEl.textContent = 'Timer: ' + totalTime + ' seconds remaining.';
+
+            if(totalTime <= 0) {
+                answerText[i].removeEventListener('click', penalize)
+                clearInterval(timerId);
+                alert('Times Up')
+            }
+
+        })
+    };
+
     //Removes question1 when the correct answer is clicked.
     answer1.addEventListener('click', function clearQuestion1() {
         body.removeChild(question1);
@@ -127,6 +160,24 @@ strtBtn.addEventListener ('click', function displayQuestions() {
         question2.appendChild(answerText[i])
         answerText[i].setAttribute('style', 'display:block; border-radius:20px; center; padding:10px 24px; margin:5px; background:#000000; color:white;')
     }
+
+    //Sets a local variable of incorrect answers to use in a for loop that will add a 10 second penalty if clicked.
+    var wrongAnswers = [answer1, answer2, answer4]
+
+    //For loop that adds a ten second penalty to the timer for the three incorrect answers.
+    for (var i = 0; i < wrongAnswers.length; i++) {
+        wrongAnswers[i].addEventListener('click', function penalize(){
+            totalTime -= 10;
+            timerEl.textContent = 'Timer: ' + totalTime + ' seconds remaining.';
+
+            if(totalTime <= 0) {
+                wrongAnswers[i].removeEventListener('click', penalize)
+                clearInterval(timerId);
+                alert('Times Up')
+            }
+
+        })
+    };
 
     //Removes question2 when the correct answer is clicked.
     answer3.addEventListener('click', function clearQuestion2() {
@@ -165,10 +216,27 @@ strtBtn.addEventListener ('click', function displayQuestions() {
         answerText[i].setAttribute('style', 'display:block; border-radius:20px; center; padding:10px 24px; margin:5px; background:#000000; color:white;')
     };
 
+    //Event listener that clears question3 if the correct answer is clicked
     answer1.addEventListener('click', function clearQuestion3() {
         body.removeChild(question3);
     });
 
+    //// For loop adds a 10 second penalty for clicking one of the three incorrect answers. I just changed the index to start at the second index since the correct answer is the first index in the object.
+    for (var i = 1; i < answerText.length; i++) {
+        answerText[i].addEventListener('click', function penalize(){
+            totalTime -= 10;
+            timerEl.textContent = 'Timer: ' + totalTime + ' seconds remaining.';
+
+            if(totalTime <= 0) {
+                answerText[i].removeEventListener('click', penalize)
+                clearInterval(timerId);
+                alert('Times Up')
+            }
+
+        })
+    };
+
+    // Displays the end of the quiz if the correct answer is chosen.
     answer1.addEventListener('click', function displayQuizEnd(){
         var end = document.createElement('div');
         var endText = document.createElement('h2');
@@ -178,23 +246,7 @@ strtBtn.addEventListener ('click', function displayQuestions() {
         body.appendChild(end);
         end.appendChild(endText);
 
-    })
+    });
     })
     })
 });
-
-// Displays the timer in the header decreasing by 1 second
-function countdown() {
-    var timerId = setInterval(function() {
-        totalTime--;
-        timerEl.textContent = 'Timer: ' + totalTime + ' seconds remaining.';
-
-        if(totalTime === 0) {
-            clearInterval(timerId);
-            alert('Times Up')
-        }
-    }, 1000);
-};
-
-// Adds click event to start the timer once start button is clicked.
-strtBtn.addEventListener('click', countdown);
