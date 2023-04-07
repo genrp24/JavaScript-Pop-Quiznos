@@ -6,7 +6,7 @@
 
 ## Installation
 
-No installation steps are required. This application may be visited at 
+No installation steps are required. This application may be visited at https://genrp24.github.io/JavaScript-Pop-Quiznos/
 
 ## Usage
 
@@ -22,5 +22,5 @@ To add a screenshot, create an `assets/images` folder in your repository and upl
 ## License
 
 Please refer to the license in the repo.**
-<br>**https://github.com/genrp24/password-claw-machine**
+<br>**https://github.com/genrp24/JavaScript-Pop-Quiznos**
 
