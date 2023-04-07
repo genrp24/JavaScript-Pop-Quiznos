@@ -4,6 +4,7 @@ var header = document.createElement('header');
 var highscores = document.createElement('span');
 var timerEl = document.createElement('span', id='timer');
 var totalTime = 60;
+var timerId = setInterval(countdown, 1000)
 var title = document.createElement('div');
 var titleName = document.createElement('h1');
 var instructions = document.createElement('h3');
@@ -41,7 +42,7 @@ highscores.textContent = 'View high scores';
 titleName.textContent = 'JavaScript Quiz Game';
 instructions.textContent = 'Try to answer the following JavaScript code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds.';
 strtBtn.textContent = 'Start Quiz'
-timerEl.textContent = 'Timer: ' + totalTime;
+timerEl.textContent = 'Timer: ' + totalTime + ' seconds remaining.';
 
 
 //Appending elements
@@ -59,18 +60,15 @@ header.setAttribute('style', 'display:flex; justify-content:space-between;')
 strtBtn.setAttribute('style', 'background-color:#000000; color:white; border-radius: 4px; padding: 14px 40px; font-size:16px;')
 
 // Displays the timer in the header decreasing by 1 second
-function countdown() {
-    var timerId = setInterval(function() {
+    function countdown() {
         totalTime--;
         timerEl.textContent = 'Timer: ' + totalTime + ' seconds remaining.';
 
         if(totalTime <= 0) {
             clearInterval(timerId);
-            alert('Times Up')
-            timerEl.textContent = 0;
+            timerEl.textContent = 'Timer: ' + totalTime + ' seconds remaining.';
         }
-    }, 1000);
-};
+    };
 
 // Adds click event to start the timer once start button is clicked.
 strtBtn.addEventListener('click', countdown);
@@ -118,7 +116,7 @@ strtBtn.addEventListener ('click', function displayQuestions() {
             if(totalTime <= 0) {
                 answerText[i].removeEventListener('click', penalize)
                 clearInterval(timerId);
-                alert('Times Up')
+                timerEl.textContent = 'Timer: ' + totalTime + ' seconds remaining.';
             }
 
         })
@@ -236,17 +234,20 @@ strtBtn.addEventListener ('click', function displayQuestions() {
         })
     };
 
+
     // Displays the end of the quiz if the correct answer is chosen.
     answer1.addEventListener('click', function displayQuizEnd(){
         var end = document.createElement('div');
         var endText = document.createElement('h2');
 
-        endText.textContent = "All done!"
+        endText.textContent = "All done! Enter your score below."
 
         body.appendChild(end);
         end.appendChild(endText);
 
     });
+
+    
     })
     })
 });
